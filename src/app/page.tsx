@@ -13,12 +13,13 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { formatPinInput, formatCurrencyInput, formatCurrency } from "@/lib/formatting";
 
 const formSchema = z.object({
   firstName: z.string().min(1, "First name is required"),
   lastName: z.string().min(1, "Last name is required"),
   phoneNumber: z.string().min(1, "Phone number is required"),
-  email: z.string().email("Invalid email address").min(1, "Email is required"),
+  email: z.email("Invalid email address").min(1, "Email is required"),
   airFryerCost: z
     .string()
     .min(1, "Air fryer cost guess is required")
@@ -49,14 +50,12 @@ export default function Home() {
     },
   });
 
-  const formatPin = (value: string) => {
-    const digits = value.replace(/\D/g, "");
-    const limited = digits.slice(0, 16);
-    return limited.replace(/(\d{4})(?=\d)/g, "$1-");
-  };
-
   const onSubmit = (data: FormData) => {
-    console.log("Form Data:", data);
+    const formattedData = {
+      ...data,
+      airFryerCost: formatCurrency(data.airFryerCost),
+    };
+    console.log("Form Data:", formattedData);
   };
 
   return (
@@ -127,7 +126,20 @@ export default function Home() {
               <FormItem>
                 <FormLabel>Guess the Air Fryer's Cost</FormLabel>
                 <FormControl>
-                  <Input placeholder="$0.00" {...field} />
+                  <div className="relative">
+                    <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">
+                      $
+                    </span>
+                    <Input
+                      placeholder="0.00"
+                      className="pl-8"
+                      {...field}
+                      onChange={(e) => {
+                        const formatted = formatCurrencyInput(e.target.value);
+                        field.onChange(formatted);
+                      }}
+                    />
+                  </div>
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -145,7 +157,7 @@ export default function Home() {
                     placeholder="####-####-####-####"
                     {...field}
                     onChange={(e) => {
-                      const formatted = formatPin(e.target.value);
+                      const formatted = formatPinInput(e.target.value);
                       field.onChange(formatted);
                     }}
                     maxLength={19}
