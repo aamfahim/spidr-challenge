@@ -70,8 +70,8 @@ export default function Home() {
   };
 
   return (
-    <div className="container mx-auto p-6 max-w-md bg-[#56ACBD]">
-      <h1 className="text-2xl font-bold mb-6 text-center">Spidr Registration Form</h1>
+    <div className="container mx-auto p-6 max-w-md bg-[#56ACBD] text-white">
+      <h1 className="text-2xl font-bold mb-6 text-center font-light">Spidr Registration Form</h1>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
           <FormField
@@ -210,7 +210,7 @@ export default function Home() {
             )}
           />
 
-          <Button type="submit" className="w-full rounded-none">
+          <Button type="submit" className="w-full rounded-none bg-[#56ACBD] text-white border border-white">
             Submit
           </Button>
         </form>
