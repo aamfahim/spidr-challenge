@@ -165,7 +165,7 @@ export default function Home() {
             name="airFryerCost"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Guess the Air Fryer's Cost</FormLabel>
+                <FormLabel>Guess the Air Fryer&apos;s Cost</FormLabel>
                 <FormControl>
                   <div className="relative">
                     <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">
