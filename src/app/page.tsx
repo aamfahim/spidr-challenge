@@ -70,8 +70,8 @@ export default function Home() {
   };
 
   return (
-    <div className="container mx-auto p-6 max-w-md">
-      <h1 className="text-2xl font-bold mb-6">Spidr Registration Form</h1>
+    <div className="container mx-auto p-6 max-w-md bg-[#56ACBD]">
+      <h1 className="text-2xl font-bold mb-6 text-center">Spidr Registration Form</h1>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
           <FormField
@@ -81,13 +81,14 @@ export default function Home() {
               <FormItem>
                 <FormLabel>First Name</FormLabel>
                 <FormControl>
-                  <Input 
-                    placeholder="Enter your first name" 
+                  <Input
+                    placeholder="Enter your first name"
                     {...field}
                     onChange={(e) => {
                       const formatted = formatNameInput(e.target.value);
                       field.onChange(formatted);
                     }}
+                    className="rounded-none"
                   />
                 </FormControl>
                 <FormMessage />
@@ -102,13 +103,14 @@ export default function Home() {
               <FormItem>
                 <FormLabel>Last Name</FormLabel>
                 <FormControl>
-                  <Input 
-                    placeholder="Enter your last name" 
+                  <Input
+                    placeholder="Enter your last name"
                     {...field}
                     onChange={(e) => {
                       const formatted = formatNameInput(e.target.value);
                       field.onChange(formatted);
                     }}
+                    className="rounded-none"
                   />
                 </FormControl>
                 <FormMessage />
@@ -123,14 +125,15 @@ export default function Home() {
               <FormItem>
                 <FormLabel>Phone Number</FormLabel>
                 <FormControl>
-                  <Input 
-                    placeholder="(123) 456-7890" 
+                  <Input
+                    placeholder="(123) 456-7890"
                     {...field}
                     onChange={(e) => {
                       const formatted = formatPhoneInput(e.target.value);
                       field.onChange(formatted);
                     }}
                     maxLength={14}
+                    className="rounded-none"
                   />
                 </FormControl>
                 <FormMessage />
@@ -145,7 +148,12 @@ export default function Home() {
               <FormItem>
                 <FormLabel>Email Address</FormLabel>
                 <FormControl>
-                  <Input placeholder="john@example.com" type="email" {...field} />
+                  <Input
+                    placeholder="john@example.com"
+                    type="email"
+                    {...field}
+                    className="rounded-none"
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -165,7 +173,7 @@ export default function Home() {
                     </span>
                     <Input
                       placeholder="0.00"
-                      className="pl-8"
+                      className="pl-8 rounded-none"
                       {...field}
                       onChange={(e) => {
                         const formatted = formatCurrencyInput(e.target.value);
@@ -194,6 +202,7 @@ export default function Home() {
                       field.onChange(formatted);
                     }}
                     maxLength={19}
+                    className="rounded-none"
                   />
                 </FormControl>
                 <FormMessage />
@@ -201,7 +210,7 @@ export default function Home() {
             )}
           />
 
-          <Button type="submit" className="w-full">
+          <Button type="submit" className="w-full rounded-none">
             Submit
           </Button>
         </form>
