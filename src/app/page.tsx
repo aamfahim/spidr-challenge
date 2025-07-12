@@ -13,7 +13,12 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { formatPinInput, formatCurrencyInput, formatCurrency } from "@/lib/formatting";
+import {
+  formatPinInput,
+  formatCurrencyInput,
+  formatCurrency,
+  formatPhoneInput
+} from "@/lib/formatting";
 
 const formSchema = z.object({
   firstName: z.string().min(1, "First name is required"),
@@ -98,7 +103,15 @@ export default function Home() {
               <FormItem>
                 <FormLabel>Phone Number</FormLabel>
                 <FormControl>
-                  <Input placeholder="Enter your phone number" {...field} />
+                  <Input 
+                    placeholder="(123) 456-7890" 
+                    {...field}
+                    onChange={(e) => {
+                      const formatted = formatPhoneInput(e.target.value);
+                      field.onChange(formatted);
+                    }}
+                    maxLength={14}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
