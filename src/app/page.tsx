@@ -173,7 +173,7 @@ export default function Home() {
                     </span>
                     <Input
                       placeholder="0.00"
-                      className="pl-8 rounded-none"
+                      className={`pl-8 rounded-none ${form.formState.errors.airFryerCost ? "border-red-500" : ""}`}
                       {...field}
                       onChange={(e) => {
                         const formatted = formatCurrencyInput(e.target.value);
