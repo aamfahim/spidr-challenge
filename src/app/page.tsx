@@ -13,6 +13,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { formatPinInput, formatCurrencyInput, formatCurrency } from "@/lib/formatting";
 
 const formSchema = z.object({
   firstName: z.string().min(1, "First name is required"),
@@ -49,25 +50,12 @@ export default function Home() {
     },
   });
 
-  const formatPinInput = (value: string) => {
-    const digits = value.replace(/\D/g, "");
-    const limited = digits.slice(0, 16);
-    return limited.replace(/(\d{4})(?=\d)/g, "$1-");
-  };
-
-  const formatCurrencyInput = (value: string) => {
-    const filtered = value.replace(/[^0-9.]/g, "");
-
-    const parts = filtered.split(".");
-    if (parts.length > 2) {
-      return parts[0] + "." + parts.slice(1).join("");
-    }
-
-    return filtered;
-  };
-
   const onSubmit = (data: FormData) => {
-    console.log("Form Data:", data);
+    const formattedData = {
+      ...data,
+      airFryerCost: formatCurrency(data.airFryerCost),
+    };
+    console.log("Form Data:", formattedData);
   };
 
   return (
