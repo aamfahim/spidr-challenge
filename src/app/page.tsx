@@ -55,6 +55,17 @@ export default function Home() {
     return limited.replace(/(\d{4})(?=\d)/g, "$1-");
   };
 
+  const formatCurrency = (value: string) => {
+    const filtered = value.replace(/[^0-9.]/g, "");
+
+    const parts = filtered.split(".");
+    if (parts.length > 2) {
+      return parts[0] + "." + parts.slice(1).join("");
+    }
+
+    return filtered;
+  };
+
   const onSubmit = (data: FormData) => {
     console.log("Form Data:", data);
   };
@@ -135,6 +146,10 @@ export default function Home() {
                       placeholder="0.00"
                       className="pl-8"
                       {...field}
+                      onChange={(e) => {
+                        const formatted = formatCurrency(e.target.value);
+                        field.onChange(formatted);
+                      }}
                     />
                   </div>
                 </FormControl>
