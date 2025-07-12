@@ -40,3 +40,7 @@ export const formatPhoneInput = (value: string) => {
 
     return limited;
 };
+
+export const formatNameInput = (value: string) => {
+    return value.replace(/[^a-zA-Z\s]/g, "");
+};
