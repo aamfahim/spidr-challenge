@@ -15,7 +15,6 @@ export const formatCurrencyInput = (value: string) => {
     return filtered;
 };
 
-
 export const formatCurrency = (value: string) => {
     const digits = value.replace(/[^0-9.]/g, "");
     const numberValue = parseFloat(digits);
