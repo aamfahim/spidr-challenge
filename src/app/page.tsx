@@ -49,13 +49,13 @@ export default function Home() {
     },
   });
 
-  const formatPin = (value: string) => {
+  const formatPinInput = (value: string) => {
     const digits = value.replace(/\D/g, "");
     const limited = digits.slice(0, 16);
     return limited.replace(/(\d{4})(?=\d)/g, "$1-");
   };
 
-  const formatCurrency = (value: string) => {
+  const formatCurrencyInput = (value: string) => {
     const filtered = value.replace(/[^0-9.]/g, "");
 
     const parts = filtered.split(".");
@@ -147,7 +147,7 @@ export default function Home() {
                       className="pl-8"
                       {...field}
                       onChange={(e) => {
-                        const formatted = formatCurrency(e.target.value);
+                        const formatted = formatCurrencyInput(e.target.value);
                         field.onChange(formatted);
                       }}
                     />
@@ -169,7 +169,7 @@ export default function Home() {
                     placeholder="####-####-####-####"
                     {...field}
                     onChange={(e) => {
-                      const formatted = formatPin(e.target.value);
+                      const formatted = formatPinInput(e.target.value);
                       field.onChange(formatted);
                     }}
                     maxLength={19}
