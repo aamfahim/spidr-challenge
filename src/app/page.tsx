@@ -127,7 +127,16 @@ export default function Home() {
               <FormItem>
                 <FormLabel>Guess the Air Fryer's Cost</FormLabel>
                 <FormControl>
-                  <Input placeholder="$0.00" {...field} />
+                  <div className="relative">
+                    <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">
+                      $
+                    </span>
+                    <Input
+                      placeholder="0.00"
+                      className="pl-8"
+                      {...field}
+                    />
+                  </div>
                 </FormControl>
                 <FormMessage />
               </FormItem>
