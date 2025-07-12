@@ -17,7 +17,8 @@ import {
   formatPinInput,
   formatCurrencyInput,
   formatCurrency,
-  formatPhoneInput
+  formatPhoneInput,
+  formatNameInput
 } from "@/lib/formatting";
 
 const formSchema = z.object({
@@ -80,7 +81,14 @@ export default function Home() {
               <FormItem>
                 <FormLabel>First Name</FormLabel>
                 <FormControl>
-                  <Input placeholder="Enter your first name" {...field} />
+                  <Input 
+                    placeholder="Enter your first name" 
+                    {...field}
+                    onChange={(e) => {
+                      const formatted = formatNameInput(e.target.value);
+                      field.onChange(formatted);
+                    }}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -94,7 +102,14 @@ export default function Home() {
               <FormItem>
                 <FormLabel>Last Name</FormLabel>
                 <FormControl>
-                  <Input placeholder="Enter your last name" {...field} />
+                  <Input 
+                    placeholder="Enter your last name" 
+                    {...field}
+                    onChange={(e) => {
+                      const formatted = formatNameInput(e.target.value);
+                      field.onChange(formatted);
+                    }}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
