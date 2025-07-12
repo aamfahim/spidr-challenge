@@ -13,12 +13,22 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { formatPinInput, formatCurrencyInput, formatCurrency } from "@/lib/formatting";
+import {
+  formatPinInput,
+  formatCurrencyInput,
+  formatCurrency,
+  formatPhoneInput
+} from "@/lib/formatting";
 
 const formSchema = z.object({
   firstName: z.string().min(1, "First name is required"),
   lastName: z.string().min(1, "Last name is required"),
-  phoneNumber: z.string().min(1, "Phone number is required"),
+  phoneNumber: z
+    .string()
+    .regex(
+      /^\(\d{3}\) \d{3}-\d{4}$/,
+      "Phone number must be in format (XXX) XXX-XXXX"
+    ),
   email: z.email("Invalid email address").min(1, "Email is required"),
   airFryerCost: z
     .string()
@@ -98,7 +108,15 @@ export default function Home() {
               <FormItem>
                 <FormLabel>Phone Number</FormLabel>
                 <FormControl>
-                  <Input placeholder="Enter your phone number" {...field} />
+                  <Input 
+                    placeholder="(123) 456-7890" 
+                    {...field}
+                    onChange={(e) => {
+                      const formatted = formatPhoneInput(e.target.value);
+                      field.onChange(formatted);
+                    }}
+                    maxLength={14}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -112,7 +130,7 @@ export default function Home() {
               <FormItem>
                 <FormLabel>Email Address</FormLabel>
                 <FormControl>
-                  <Input placeholder="Enter your email" type="email" {...field} />
+                  <Input placeholder="john@example.com" type="email" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
